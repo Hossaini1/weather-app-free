@@ -30,9 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const rootElem = document.getElementById('root');
 
             let isCelsius = true;
-            let tempCelsius = data.main.temp;
-            let minTempCelsius = data.main.temp_min;
-            let maxTempCelsius = data.main.temp_max;
+            let {temp:tempCelsius,temp_min:minTempCelsius,temp_max:maxTempCelsius}=data.main;
+           
 
             rootElem.innerHTML += `
            <img class='weather_icon' src="${data.weather[0].icon}" alt="weather-icon">
