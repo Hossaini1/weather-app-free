@@ -27,18 +27,54 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log(data);
             const option = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' }
             const date = new Date().toLocaleDateString('de-DE', option)
-            const rootElem = document.getElementById('root')
+            const rootElem = document.getElementById('root');
+
+            let isCelsius = true;
+            let tempCelsius = data.main.temp;
+            let minTempCelsius = data.main.temp_min;
+            let maxTempCelsius = data.main.temp_max;
+
             rootElem.innerHTML += `
-          
            <img class='weather_icon' src="${data.weather[0].icon}" alt="weather-icon">
-           <h3 class="current_temp">${data.main.temp}&#8451</h3>
+           <h3 class="current_temp">${tempCelsius}&#8451</h3>
           <div class="temps_container">
-           <p>L: ${data.main.temp_min}&#8451</p>
-           <p>H: ${data.main.temp_max}&#8451</p></div>
+           <p class="temp_min">L: ${minTempCelsius}&#8451</p>
+           <p class="temp_max">H: ${maxTempCelsius}&#8451</p>
+           </div>
            <p>${date}</p>
-         
-           
-           `
+           <button class='toggleBtn'>Farenheit</button>
+           `;
+
+            const toggleBtn = document.querySelector('.toggleBtn');
+
+            toggleBtn.addEventListener('click', () => {
+              const currentTemp = document.querySelector('.current_temp');
+              const minTemp = document.querySelector('.temp_min');
+              const MaxTemp = document.querySelector('.temp_max');
+
+
+              if (isCelsius) {
+                const currentTempFarenheit = (tempCelsius * 9 / 5) + 32;
+                const minTempFarenheit = (minTempCelsius * 9 / 5) + 32;
+                const maxTempFarenheit = (maxTempCelsius * 9 / 5) + 32;
+
+                currentTemp.innerHTML = `${currentTempFarenheit.toFixed(2)}&#8457;`;
+                minTemp.innerHTML = `L: ${minTempFarenheit.toFixed(2)}&#8457;`;
+                MaxTemp.innerText = `H: ${maxTempFarenheit.toFixed(2)}℉`;
+                // akhari fuer test hast 
+
+                toggleBtn.textContent='Celsius';
+
+              } else {
+                currentTemp.innerHTML = `${tempCelsius}&#8451`;
+                minTemp.innerHTML = `L: ${minTempCelsius}&#8451`;
+                MaxTemp.innerHTML = `H: ${maxTempCelsius}&#8451`;
+                toggleBtn.textContent='Farenheit';
+
+              }
+              isCelsius = !isCelsius;
+            })
+
           } else {
             console.log('No weather data recived!');
           }

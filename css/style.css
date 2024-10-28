@@ -21,8 +21,8 @@ header h1 {
 }
 
 #root {
-  width: max-content;
-  min-height: 20rem;
+  min-width: 21rem;
+  min-height: 21rem;
   background: linear-gradient(to bottom, rgb(130, 238, 130), rgb(130, 130, 238));
   position: absolute;
   left: 50%;
@@ -58,4 +58,20 @@ header h1 {
   justify-content: space-evenly;
   width: 100%;
   margin: 1em 0;
+}
+
+.toggleBtn{
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  background-color: rgb(99, 187, 228);
+  color:white;
+  border: none;
+  outline: none;
+  border-radius: 333px;
+  font-weight: 700;
+  width: 100%;
+  cursor: pointer;
+  &:hover{
+    background-color: rgb(119, 194, 230);
+  }
 }
